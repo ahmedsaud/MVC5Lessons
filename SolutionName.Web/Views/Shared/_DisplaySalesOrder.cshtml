@@ -1,0 +1,37 @@
+﻿<h2>@ViewBag.Title</h2>
+<p data-bind="text: MessageToClient"></p>
+
+<div>
+
+    <div>
+        <label>Customer Name:</label>
+        <span data-bind="text: CustomerName"></span>
+    </div>
+    <div>
+        <label>PO. Number:</label>
+        <span data-bind="text: PONumber"></span>
+
+    </div>
+
+</div>
+
+<table class="table table-striped">
+    <tr>
+        <th>Product Code</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+    </tr>
+    <tbody data-bind="foreach: SalesOrderItems">
+        <tr>
+            <td class="form-group"><span class="form-control input-sm" data-bind="text: ProductId" /></td>
+            <td class="form-group"><span class="form-control input-sm" data-bind="text: Quantity" /></td>
+            <td class="form-group"><span class="form-control input-sm" data-bind="text: UnitPrice" /></td>
+        </tr>
+
+    </tbody>
+
+</table>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

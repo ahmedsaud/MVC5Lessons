@@ -1,0 +1,22 @@
+﻿@model SolutionName.Web.ViewModels.SalesOrderViewModel
+@using System.Activities.Expressions
+@using System.Web.Script.Serialization
+
+@{
+    ViewBag.Title = "Sales Order Details";
+}
+
+@{string data = new JavaScriptSerializer().Serialize(Model);}
+
+@section scripts{
+    
+    <script src="~/Scripts/knockout-3.3.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/salesorderviewmodel.js"></script>
+    <script type="text/javascript">
+        var SalesOrderViewModel = new SalesOrderViewModel(@Html.Raw(data));
+        ko.applyBindings(SalesOrderViewModel);
+    </script>
+
+}
+@Html.Partial("_DisplaySalesOrder")

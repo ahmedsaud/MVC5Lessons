@@ -1,0 +1,61 @@
+﻿<h2>@ViewBag.Title</h2>
+<p data-bind="text: MessageToClient"></p>
+
+<div>
+
+    <div class="form-group">
+        <label class="control-label" for="CustomerName">Customer Name:</label>
+        <input class="form-control" name="CustomerName" id="CustomerName" data-bind="
+            value: CustomerName, 
+            event: {change: flagSalesOrderAsEdited}" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="PONumber">PO. Number:</label>
+        <input class="form-control" name="PONumber" id="PONumber" data-bind="
+            value: PONumber, 
+            event: {change: flagSalesOrderAsEdited}" />
+        
+</div>
+
+</div>
+
+<table class="table table-striped" >
+    <tr>
+        <th>Product Code</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th data-bind="click: addSalesOrderItem" class="btn btn-info btn-sm">Add</th>
+    </tr>
+    <tbody data-bind="foreach: SalesOrderItems">
+        <tr>
+            <td class="form-group"><select data-bind='
+                attr: {"id": "ProductCode_" + $index()},
+                options: $parent.products,
+                value: ProductId,
+                optionsCaption: "Choose...",
+                optionsText:function (item) {
+                    return ko.utils.unwrapObservable(item.Name);
+                },
+                optionsValue: "ProductId",
+                event: {change: flagSalesOrderItemAsEdited}'></select>
+            <td class="form-group"><input class="form-control input-sm" data-bind="
+                value: Quantity, 
+                event: {change: flagSalesOrderItemAsEdited}, 
+                hasfocus: true " /></td>
+            <td class="form-group"><input class="form-control input-sm" data-bind="
+                value: UnitPrice, 
+                event: {change: flagSalesOrderItemAsEdited}, 
+                hasfocus: true" /></td>
+            <td class="form-group"><button class="btn-danger btn-xs" data-bind="
+                click: $parent.deleteSalesOrderItem">Delete</button></td>
+            
+        </tr>
+
+    </tbody>
+
+</table>
+
+<p><button data-bind="click: save">Save</button></p>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
